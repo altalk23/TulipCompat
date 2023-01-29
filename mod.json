@@ -1,0 +1,17 @@
+{
+	"geode": "1.0.0-beta",
+	"version": "v1.0.0",
+	"id": "alk.tulip-compat",
+	"name": "Tulip Compat",
+	"developer": "alk",
+	"description": "A compatibility layer to load traditional mods using Geode's system",
+	"settings": {
+		"binary-folder": {
+            "type": "string",
+			"name": "Binary Folder",
+            "description": "The path the binaries are loaded from",
+            "default": "binaries",
+            "match": "[^\\]*"
+        }
+	}
+}
