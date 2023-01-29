@@ -22,14 +22,14 @@ public:
 	ghc::filesystem::path m_path;
 
 	void loadAndTrack(std::string const& path, std::vector<MappingTracker*> const& trackers) {
-#ifdef GEODE_IS_MACOS
+#if defined(GEODE_IS_MACOS)
 		if (path.find(".dylib") != std::string::npos) {
 			using namespace std::chrono_literals;
 
 			auto binary = dlopen(path.c_str(), RTLD_NOW);
 			std::this_thread::sleep_for(100ms); // im not shameful
 		}
-#elif GEODE_IS_WINDOWS
+#elif defined(GEODE_IS_WINDOWS)
 		if (path.find(".dll") != std::string::npos) {
 			using namespace std::chrono_literals;
 
@@ -73,13 +73,13 @@ BinaryLoader::Impl::Impl(ghc::filesystem::path const& path) :
 	for (auto const& entry : ghc::filesystem::directory_iterator(path)) {
 		log::info("Loading {}", entry.path().string());
 
-#ifdef GEODE_IS_MACOS
+#if defined(GEODE_IS_MACOS)
 		auto gdMap = MappingTracker(reinterpret_cast<void*>(base::get() + 0x1980), 0x4883b2);
 
 		auto loading = std::thread(
 		    &Impl::loadAndTrack, this, entry.path().string(), std::vector<MappingTracker*>({ &gdMap })
 		);
-#elif GEODE_IS_WINDOWS
+#elif defined(GEODE_IS_WINDOWS)
 		auto gdMap = MappingTracker(reinterpret_cast<void*>(base::get() + 0x1000), 0x280e00);
 		auto cocosMap = MappingTracker(reinterpret_cast<void*>(base::get() + 0x1000), 0x11b400);
 		auto cocosExtensionMap =
