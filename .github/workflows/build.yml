@@ -8,8 +8,9 @@ on:
 
 env:
   GEODE_SDK: ${{ github.workspace }}/sdk
-  GEODE_VERSION: v1.0.0-beta
-  CLI_VERSION: v1.1.0
+  GEODE_VERSION: v1.0.0-beta2
+  GEODE_FILE_VERSION: v1.0.0-beta
+  CLI_VERSION: v1.2.0
   MOD_NAME: TulipCompat
   MOD_ID: alk.tulip-compat
 
@@ -58,7 +59,7 @@ jobs:
         mkdir bin
         mkdir bin/nightly
         cd bin/nightly
-        curl -L https://github.com/geode-sdk/geode/releases/download/${{ env.GEODE_VERSION }}/geode-${{ env.GEODE_VERSION }}-${{ matrix.config.platform_suffix }}.zip -o geode-sdk.zip
+        curl -L https://github.com/geode-sdk/geode/releases/download/${{ env.GEODE_VERSION }}/geode-${{ env.GEODE_FILE_VERSION }}-${{ matrix.config.platform_suffix }}.zip -o geode-sdk.zip
         tar -xf geode-sdk.zip
     - name: Configure CMake
       run: |
@@ -89,7 +90,7 @@ jobs:
       
       - name: Download and Unzip CLI
         run: |
-          curl -L https://github.com/geode-sdk/cli/releases/download/${{ env.CLI_VERSION }}/geode-cli-${{ env.cLI_VERSION }}-win.zip -o geode-cli.zip
+          curl -L https://github.com/geode-sdk/cli/releases/download/${{ env.CLI_VERSION }}/geode-cli-${{ env.CLI_VERSION }}-win.zip -o geode-cli.zip
           tar -xf geode-cli.zip
       - uses: actions/download-artifact@v3
         with:
