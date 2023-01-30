@@ -53,7 +53,7 @@ public:
 			log::info("Found {} hook differences", hookDiffs.size());
 
 			for (auto& [hook, metadata, diff] : hookDiffs) {
-				log::info("Has hook at address {}", hook);
+				log::info("Has hook at address {} into {}", hook, diff.m_address);
 
 				auto res = Mod::get()->patch(diff.m_address, diff.m_original);
 				if (!res) {

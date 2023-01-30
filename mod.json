@@ -10,8 +10,7 @@
             "type": "string",
 			"name": "Binary Folder",
             "description": "The path the binaries are loaded from",
-            "default": "binaries",
-            "match": "[^\\]*"
+            "default": "binaries"
         }
 	}
 }
